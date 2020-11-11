@@ -1,0 +1,90 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserDao">
+
+	<!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
+	<!-- property：主键在pojo中的属性名 -->
+	<!-- column：主键在数据库中的列名 -->
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.User" >
+		<id column="userId" property="id" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+		<result column="idCard" property="idCard" jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+
+	</resultMap>
+
+
+	<sql id="Base_Column_List" >
+       userId, username, mobile, email, password, imgurl, idCard, createTime, updateTime
+    </sql>
+
+
+	<select id="ListUser" resultMap="BaseResultMap">
+		SELECT * FROM user
+	</select>
+
+
+	<select id="findByMobile" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM user where mobile=#{mobile}
+	</select>
+
+	<select id="findUserByName" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		 FROM user where username=#{name}
+	</select>
+
+	<insert id="insertUser" parameterType="com.example.demo.entity.User"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			userid,
+			username,
+			mobile,
+			password,
+			<if test="email != null" >
+				email,
+			</if>
+			<if test="imgurl != null" >
+				imgurl,
+			</if>
+			<if test="idCard != null" >
+				idCard,
+			</if>
+			createtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			#{id},
+			#{username, jdbcType=VARCHAR},
+			#{mobile, jdbcType=VARCHAR},
+			#{password, jdbcType=VARCHAR},
+			<if test="email != null" >
+				#{email, jdbcType=VARCHAR},
+			</if>
+			<if test="imgurl != null" >
+				#{imgurl, jdbcType=VARCHAR},
+			</if>
+			<if test="idCard != null" >
+				#{idCard, jdbcType=VARCHAR},
+			</if>
+			now()
+		</trim>
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from user where id=#{id}
+	</delete>
+	
+	<update id="Update" parameterType="com.example.demo.entity.User">
+	update user set user.name=#{name},user.password=#{password},user.number=#{number} where user.id=#{id}
+	</update>
+</mapper>
