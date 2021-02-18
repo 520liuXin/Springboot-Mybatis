@@ -7,7 +7,7 @@
 	<!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
 	<!-- property：主键在pojo中的属性名 -->
 	<!-- column：主键在数据库中的列名 -->
-	<resultMap id="BaseResultMap" type="com.example.demo.entity.User" >
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.Bo.UserBo" >
 		<id column="userId" property="id" jdbcType="VARCHAR" />
 		<result column="username" property="username" jdbcType="VARCHAR" />
 		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
@@ -16,13 +16,15 @@
 		<result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
 		<result column="idCard" property="idCard" jdbcType="VARCHAR" />
 		<result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="begDate" property="begDate" jdbcType="TIMESTAMP" />
+		<result column="endDate" property="endData" jdbcType="TIMESTAMP" />
 		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
 
 	</resultMap>
 
 
 	<sql id="Base_Column_List" >
-       userId, username, mobile, email, password, imgurl, idCard, createTime, updateTime
+       userId, username, mobile, email, password, imgurl, idCard, createTime,updateTime
     </sql>
 
 
@@ -42,8 +44,14 @@
 		<include refid="Base_Column_List" />
 		 FROM user where username=#{name}
 	</select>
+	<select id="findUser" resultType="com.example.demo.entity.UserInfo">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM user
+		 where DATE_FORMAT(Now(),'%Y%m%d%H%i%s') between str_to_date(due_beg,'%Y%m%d%H%i%s') and str_to_date(due_end,'%Y%m%d%H%i%s')
+	</select>
 
-	<insert id="insertUser" parameterType="com.example.demo.entity.User"
+	<insert id="insertUser" parameterType="com.example.demo.entity.UserInfo"
 		keyProperty="id" useGeneratedKeys="true">
 		insert into user
 		<trim prefix="(" suffix=")" suffixOverrides="," >
@@ -84,7 +92,7 @@
 		delete from user where id=#{id}
 	</delete>
 	
-	<update id="Update" parameterType="com.example.demo.entity.User">
+	<update id="Update" parameterType="com.example.demo.entity.UserInfo">
 	update user set user.name=#{name},user.password=#{password},user.number=#{number} where user.id=#{id}
 	</update>
 </mapper>

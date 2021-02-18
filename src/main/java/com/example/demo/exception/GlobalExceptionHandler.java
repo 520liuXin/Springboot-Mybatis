@@ -79,4 +79,5 @@ public class GlobalExceptionHandler {
         logger.error(e.getMessage(), e);
         return new  ResponseInfo("500", "系统繁忙,请稍后再试");
     }
+    
 }

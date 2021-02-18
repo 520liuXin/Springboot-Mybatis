@@ -1,23 +1,29 @@
 package com.example.demo.service;
 
 import java.util.List;
+
+import com.example.demo.entity.UserInfo;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.User;
+
 
 
 @Service
 public interface UserService {
 
-	public List<User> findByName(String name) ;
+	public List<UserInfo> findByName(String name) ;
 
+	public List<UserInfo> findByUser(UserInfo user) ;
 
-	public int UserService(User user) ;
+	public int UserService(UserInfo user) ;
 
-	public List<User> ListUser();
+	public List<UserInfo> ListUser();
 	
 	
-	public int Update(User user);
+	public int Update(UserInfo user);
 	
 	public int Delete(int id);
+
+
+	public  void commitTransaction();
 }
