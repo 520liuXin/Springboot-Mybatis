@@ -6,12 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @description
+ * @description 自定义注解
  * @author liuxin
  * @date 2021/2/5 
  * @return 
  **/
+//Target表示我们的注解可以用在哪些地方
 @Target({ElementType.FIELD,ElementType.ANNOTATION_TYPE})
+//Retention表示我们的注解在什么时候才有效
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExcelField {
     /**

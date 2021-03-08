@@ -81,6 +81,7 @@ public class ExportExcel {
      * @param groups 导入分组
      */
     public ExportExcel(String title, Class<?> cls, int type, int... groups) {
+        //使用反射获取字段
         Field[] fs = cls.getDeclaredFields();
         for (Field f : fs) {
             ExcelField ef = f.getAnnotation(ExcelField.class);
