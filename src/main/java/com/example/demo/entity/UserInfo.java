@@ -4,6 +4,7 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.afterturn.easypoi.excel.annotation.ExcelIgnore;
 import com.example.demo.utils.excel.annotation.ExcelField;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -13,6 +14,10 @@ import javax.validation.constraints.Pattern;
 
 
 @Data
+@Accessors(chain = true) //链式写法
+/**    user.setUsername("刘信").setEmail("www.799296010@qq.com").setIdCard("12345678")
+ .setMobile("17673817175").setPassword("12432421")
+ .setId(432432L).setCreateTime(new Date()).setUpdateTime(new Date());    */
 public class UserInfo extends BasePo {
 	/**
 	 * 用户名

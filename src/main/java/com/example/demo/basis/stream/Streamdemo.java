@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,10 +33,43 @@ public class Streamdemo {
 
     public static void main(String[] args) {
 
-        selectTree();
+//        selectTree();
+//
+//        System.out.println(listTree.toString());
 
-        System.out.println(listTree.toString());
+            String[] ss = {"Rafael Nadal", "Bovak Djokovic",
+                    "Stanislas Wawrinka",
+                    "David Ferrer","Roger Federer",
+                    "Andy Murray","Tomas Berdych",
+                    "Juan Martin Del Potro"};
+            List<String> list = Arrays.asList(ss);
 
+//            //for循环
+//            for (int i = 0; i < ss.length; i++) {
+//                System.out.println(list.get(i));
+//            }
+//
+//
+//            for (String aa : list) {
+//                System.out.println(aa);
+//            }
+//
+//            //第三种 使用lambda表达式以及函数操作符 ->
+//            list.forEach((bb) -> System.out.println(bb));
+//
+//            //第四种 Java8中使用双冒号：：操作符完成
+//            list.forEach(System.out::println);
+//            HashMap<String, String> hashMap = new HashMap<>(16);
+
+//           list.stream().filter(s->s.length()!=45).limit(3).forEach(System.out::println);
+//
+//
+//        List<String> list1 = list.stream().filter(s -> s.length() != 45).limit(3).collect(Collectors.toList());
+//        list1.forEach(System.out::println);
+
+
+        ArrayList<String> collect = list.stream().filter(s -> s.length() != 45).limit(3).collect(Collectors.toCollection(ArrayList::new));
+        list.forEach(System.out::println);
 
 
 
@@ -71,6 +106,8 @@ public class Streamdemo {
         }).collect(Collectors.toList());
         return ChildNodeList;
     }
+
+
 
 
 }

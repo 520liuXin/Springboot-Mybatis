@@ -1,0 +1,16 @@
+TestUser:
+  name: liuxin
+  age: 1
+
+spring:
+  application:
+    name: springboot-servant
+#eureka.client.registerWithEureka=false   #是否将自己注册到 Eureka-Server 中，默认的为 true   registerWithEureka等同于register_with_eureka
+#eureka.client.fetchRegistry=false        #是否需要拉取服务信息，默认未true       fetchRegistry等同于 fetch-registry
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:7001/eureka/
+#  instance:
+#    hostname: springboot-servant-8888
+

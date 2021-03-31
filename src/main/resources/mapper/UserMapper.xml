@@ -70,6 +70,7 @@
 			</if>
 			createtime
 		</trim>
+		java面试准备
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
 			#{id},
 			#{username, jdbcType=VARCHAR},

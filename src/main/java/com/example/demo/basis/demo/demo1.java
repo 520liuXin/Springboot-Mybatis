@@ -1,10 +1,33 @@
 package com.example.demo.basis.demo;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /*
  * @Author liuxin
- * @Description //TODO
+ * @Description //TODO Atomic
  **/
 public class demo1 {
+
+
+    public static void main(String[] args) {
+        Map<String,String> map=new ConcurrentHashMap<>();
+
+        Map<String,String> map1=new Hashtable<>();
+        Map<String,String> map2=new HashMap<>();
+
+        System.out.println(2<<3);
+        System.out.println(8>>1);
+
+
+    }
+
+
+
+
+
     static  class X{
         Y y=new Y();
         public X(){

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.example.demo.entity.TestUser;
 import com.example.demo.entity.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
@@ -36,34 +37,41 @@ public class UserControllerTest {
 
     private MockMvc mvc;
     private MockHttpSession session;
+    @Autowired
+    private TestUser testUser;
+
 
     @Before
-    public void setupMockMvc(){
+    public void setupMockMvc() {
         mvc = MockMvcBuilders.webAppContextSetup(wac).build(); //初始化MockMvc对象
         session = new MockHttpSession();
-        UserInfo user =new UserInfo();
-        session.setAttribute("user",user); //拦截器那边会判断用户是否登录，所以这里注入一个用户
+        UserInfo user = new UserInfo();
+        session.setAttribute("user", user); //拦截器那边会判断用户是否登录，所以这里注入一个用户
+    }
+
+
+    @Test
+    public void testDome() {
+        System.out.println(testUser);
+
+
     }
 
     @Test
     @Transactional
-    public void addLearn() throws Exception{
-           UserInfo user=new UserInfo();
-           user.setUsername("刘信");
-           user.setEmail("www.799296010@qq.com");
-           user.setIdCard("12345678");
-           user.setMobile("17673817175");
-           user.setPassword("12432421");
-           user.setId(432432L);
-           user.setCreateTime(new Date());
-           user.setUpdateTime(new Date());
-           UserInfo user1=new UserInfo();
-           Optional<UserInfo> opt =Optional.of(user1);
-           opt.get();
-           log.info(opt.get().toString());
-           String jsonString = JSON.toJSONString(user);
-           log.info(jsonString);
-           mvc.perform(MockMvcRequestBuilders.post("/user/insert")
+    public void addLearn() throws Exception {
+        UserInfo user = new UserInfo();
+
+        user.setUsername("刘信").setEmail("www.799296010@qq.com").setIdCard("12345678")
+                .setMobile("17673817175").setPassword("12432421")
+                .setId(432432L).setCreateTime(new Date()).setUpdateTime(new Date());
+        UserInfo user1 = new UserInfo();
+        Optional<UserInfo> opt = Optional.of(user1);
+        opt.get();
+        log.info(opt.get().toString());
+        String jsonString = JSON.toJSONString(user);
+        log.info(jsonString);
+        mvc.perform(MockMvcRequestBuilders.post("/user/insert")
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .content(jsonString.getBytes()) //传json参数
                 .session(session)
@@ -71,11 +79,6 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
-
-
-
-
-
 
 
 }
